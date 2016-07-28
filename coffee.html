@@ -51,6 +51,7 @@
     var myImage;
     var myRevenueMessage;
     var makeCoffee;
+    var drinksOrdered = [];
 
     // use this JavaScript object in further study step
 
@@ -58,9 +59,12 @@
 
     myImage.setAttribute('src', 'static/coffee_beans.jpg');
 
+    buttons = document.getElementsByTagName("button");
+    
     myRevenueMessage = document.getElementById("message");
     
-    makeCoffee = function() {
+    makeCoffee = function(type) {
+        drinksOrdered.push(type);
         myImage.setAttribute('src', 'https://nationalcoffeeblog.files.wordpress.com/2015/11/giphy.gif?w=676');
 
         setTimeout(function() {
@@ -69,13 +73,17 @@
         setTimeout(function(){
             myImage.setAttribute('src', 'static/coffee_beans.jpg');
         }, 4500);
+        console.log(drinksOrdered);
     };
 
-    myImage.addEventListener('click', makeCoffee);
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function(evt){
+            makeCoffee(evt.currentTarget.id);
+        });
+    }
+
 
     
-
-
     var prices = {
         "brew": 2.05,
         "espresso": 3.25,
